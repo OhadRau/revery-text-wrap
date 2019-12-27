@@ -75,45 +75,62 @@ module TextWrap (C: TEXT_WRAP_CONFIG) = struct
           if C.debug then begin
             print_endline "Decision: hyphenate"
           end;
+
+          (* For each character in the token, do processing to determine where to break *)
           for i = 0 to String.length token - 1 do
             let char_width = width_of_char token.[i] in
             if C.debug then begin
               Printf.printf "--Index: %d, Char: %c, Char_width: %f\n" i token.[i] char_width
             end;
-            (* FIXME: When do we actually insert the hyphen? *)
+
+            (* If it won't overflow this line OR if there's no way to fit it into a line without overflowing *)
             if (!width +. char_width <= max_width) || (!width = 0.0 && char_width >= max_width) then begin
               if C.debug then begin
                 print_endline "--Decision: append"
               end;
+
+              (* Append it to the buffer *)
               Buffer.add_char buffer token.[i];
               width := !width +. char_width
+            (* If it will overflow... *)
             end else begin
               if C.debug then begin
                 print_endline "--Decision: break"
               end;
               (* Finalize the current line and reset the buffer (if we need to) *)
               if !width > 0.0 then begin
+                (* If we're part-way through the string already *)
                 if i > 0 then begin
                   if C.debug then begin
                     print_endline "--Clear+hyphenate"
                   end;
+
+                  (* We need to swap the last char of the buffer with a -, because the
+                     hyphen will be the last character that fits into this width. *)
                   let buffer_length = Buffer.length buffer in
                   let last_char = Buffer.nth buffer (buffer_length - 1) in
+                  (* If we've only put one character of the string before hyphenating, we
+                     should just swap with a space, so that we don't have a lonley hyphen
+                     on the previous line *)
                   let hyphen = if i = 1 then " " else "-" in
+                  (* Flush the buffer with the hyphen and reset the buffer to just the last
+                     character that was in the buffer (where the hyphen now is) *)
                   AppendList.append output_lines (Buffer.sub buffer 0 (buffer_length - 1) ^ hyphen);
                   Buffer.reset buffer;
                   Buffer.add_char buffer last_char;
                   width := width_of_char last_char
+                (* Otherwise, this is the start of the token *)
                 end else begin
                   if C.debug then begin
                     print_endline "--Clear"
                   end;
+                  (* So just flush & reset the buffer *)
                   AppendList.append output_lines (Buffer.contents buffer);
                   Buffer.reset buffer;
                   width := 0.0
                 end
               end;
-              (* Then push the new token onto the buffer *)
+              (* Then push the next character from this token onto the buffer *)
               width := !width +. char_width;
               Buffer.add_char buffer token.[i]
             end
