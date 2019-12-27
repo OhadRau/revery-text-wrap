@@ -1,8 +1,7 @@
 (library
  (name wrap)
  (public_name revery-text-wrap)
- (modules Wrap AppendList Tokenize)
- (libraries batteries))
+ (modules Wrap Tokenize))
 
 (executable
  (name wrapTest)
