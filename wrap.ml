@@ -9,7 +9,17 @@ let width_of_token ~width_of_char str =
   end;
   !sum
 
-let wrap ~max_width ~width_of_char ?(hyphenate=false) ?(ignore_preceding_whitespace=true) ?(debug=false) text =
+let rec list_of_queue q =
+  if Queue.is_empty q then []
+  else begin
+    (* We need to split into two lines because the RHS of ::
+        gets evaluated first, leading to recursion before the
+        item is removed from the queue. *)
+    let first = Queue.take q in
+    first::(list_of_queue q)
+  end
+
+let wrap_queue ~max_width ~width_of_char ?(hyphenate=false) ?(ignore_preceding_whitespace=true) ?(debug=false) text =
   (* Create a buffer for the outputted lines *)
   let output_lines = Queue.create () in
   (* Split the input text into lines and for each line: *)
@@ -146,3 +156,6 @@ let wrap ~max_width ~width_of_char ?(hyphenate=false) ?(ignore_preceding_whitesp
     end
   end;
   output_lines
+
+let wrap ~max_width ~width_of_char ?(hyphenate=false) ?(ignore_preceding_whitespace=true) ?(debug=false) text =
+  list_of_queue (wrap_queue ~max_width ~width_of_char ~hyphenate ~ignore_preceding_whitespace ~debug text)
