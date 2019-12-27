@@ -1,0 +1,9 @@
+(library
+ (name wrap)
+ (modules Wrap AppendList Tokenize)
+ (libraries batteries))
+
+(executable
+ (name wrapTest)
+ (modules WrapTest)
+ (libraries wrap))
