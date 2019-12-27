@@ -110,7 +110,7 @@ module TextWrap (C: TEXT_WRAP_CONFIG) = struct
                   let buffer_length = Buffer.length buffer in
                   let last_char = Buffer.nth buffer (buffer_length - 1) in
                   (* If we've only put one character of the string before hyphenating, we
-                     should just swap with a space, so that we don't have a lonley hyphen
+                     should just swap with a space, so that we don't have a lonely hyphen
                      on the previous line *)
                   let hyphen = if i = 1 then " " else "-" in
                   (* Flush the buffer with the hyphen and reset the buffer to just the last
