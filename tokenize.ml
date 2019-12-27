@@ -14,7 +14,7 @@ let split_on_newline string =
     end
   done;
   (* Append the remaining characters after the last split *)
-  if !first < String.length string - 1 then begin
+  if !first <= String.length string - 1 then begin
     Queue.add (slice ~first:!first ~last:(String.length string) string) lines 
   end;
   lines
@@ -43,7 +43,7 @@ let split_tokens string =
     | _ -> ()
   done;
   (* Append the remaining characters after the last split *)
-  if !first < String.length string - 1 then begin
+  if !first <= String.length string - 1 then begin
     Queue.add (slice ~first:!first ~last:(String.length string) string) tokens
   end;
   tokens
