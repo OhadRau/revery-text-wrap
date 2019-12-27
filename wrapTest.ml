@@ -10,6 +10,8 @@ let width_of_char = function
 
 let () =
   print_endline "0:";
+  Tokenize.split_tokens "0" |> Queue.iter print_endline;
+  print_endline "------------------";
   wrap ~width_of_char ~max_width:100.0 ~debug:true "0" |> Queue.iter print_endline;
   let wrapInput = "Here's another example of text where wrapping might be more difficult. " ^
                   "This string is very, very long and consists of words of varying lengths. " ^

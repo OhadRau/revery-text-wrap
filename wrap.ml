@@ -1,4 +1,5 @@
 open Tokenize
+module Tokenize = Tokenize
 
 (* Get the width of a token (i.e. the sum of each character's width) *)
 let width_of_token ~width_of_char str =
