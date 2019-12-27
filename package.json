@@ -1,0 +1,32 @@
+{
+  "name": "revery-text-wrap",
+  "version": "0.1.0",
+  "description": "Text wrapping library for use in Revery",
+  "scripts": {
+    "format": "esy dune build @fmt --auto-promote"
+  },
+  "esy": {
+    "build": [
+      [
+        "dune",
+        "build",
+        "--root",
+        "."
+      ]
+    ],
+    "install": [
+      "esy-installer"
+    ]
+  },
+  "peerDependencies": {
+    "ocaml": "~4.6.0"
+  },
+  "dependencies": {
+    "@opam/dune": "*",
+    "@opam/batteries": "*"
+  },
+  "devDependencies": {
+    "@esy-ocaml/merlin": "*",
+    "ocaml": "~4.6.0"
+  }
+}
