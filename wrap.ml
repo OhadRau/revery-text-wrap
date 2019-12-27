@@ -1,7 +1,3 @@
-open Batteries
-
-module AppendList = AppendList
-
 module type TEXT_WRAP_CONFIG = sig
   val width_of_char : char -> float
   val debug : bool
@@ -22,15 +18,15 @@ module TextWrap (C: TEXT_WRAP_CONFIG) = struct
 
   let wrap ~max_width ?(hyphenate=false) ?(ignore_preceding_whitespace=true) text =
     (* Create a buffer for the outputted lines *)
-    let output_lines = AppendList.empty () in
+    let output_lines = Queue.create () in
     (* Split the input text into lines and for each line: *)
-    split_on_newline text |> AppendList.iter begin fun line ->
+    split_on_newline text |> Queue.iter begin fun line ->
       (* Create a buffer for the wrapped portion of the line *)
       let buffer = Buffer.create (String.length line) in
       (* Store the width of this portion *)
       let width = ref 0.0 in
       (* Tokenize the line by whitespace and for each token: *)
-      split_tokens line |> AppendList.iter begin fun token ->
+      split_tokens line |> Queue.iter begin fun token ->
         (* Calculate the width of the token *)
         let token_width = width_of_token token in
 
@@ -44,7 +40,7 @@ module TextWrap (C: TEXT_WRAP_CONFIG) = struct
           if C.debug then begin
             print_endline "Clear"
           end;
-          AppendList.append output_lines (Buffer.contents buffer);
+          Queue.add (Buffer.contents buffer) output_lines;
           Buffer.reset buffer;
           width := 0.0
         end;
@@ -115,7 +111,7 @@ module TextWrap (C: TEXT_WRAP_CONFIG) = struct
                   let hyphen = if i = 1 then " " else "-" in
                   (* Flush the buffer with the hyphen and reset the buffer to just the last
                      character that was in the buffer (where the hyphen now is) *)
-                  AppendList.append output_lines (Buffer.sub buffer 0 (buffer_length - 1) ^ hyphen);
+                  Queue.add (Buffer.sub buffer 0 (buffer_length - 1) ^ hyphen) output_lines;
                   Buffer.reset buffer;
                   Buffer.add_char buffer last_char;
                   width := width_of_char last_char
@@ -125,7 +121,7 @@ module TextWrap (C: TEXT_WRAP_CONFIG) = struct
                     print_endline "--Clear"
                   end;
                   (* So just flush & reset the buffer *)
-                  AppendList.append output_lines (Buffer.contents buffer);
+                  Queue.add (Buffer.contents buffer) output_lines;
                   Buffer.reset buffer;
                   width := 0.0
                 end
@@ -142,7 +138,7 @@ module TextWrap (C: TEXT_WRAP_CONFIG) = struct
           end;
           (* Finalize the current line and reset the buffer (if we need to) *)
           if !width > 0.0 then begin
-            AppendList.append output_lines (Buffer.contents buffer);
+            Queue.add (Buffer.contents buffer) output_lines;
             Buffer.reset buffer
           end;
           (* Then push the new token onto the buffer *)
@@ -153,7 +149,7 @@ module TextWrap (C: TEXT_WRAP_CONFIG) = struct
 
       (* Finalize any remaining text in the buffer *)
       if !width > 0.0 then begin
-        AppendList.append output_lines (Buffer.contents buffer)
+        Queue.add (Buffer.contents buffer) output_lines
       end
     end;
     output_lines
