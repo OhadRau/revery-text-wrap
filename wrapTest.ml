@@ -19,10 +19,10 @@ let () =
                   "the more obscure edge-cases that word-wrapping can result in, such as " ^
                   "placing a hyphen in the middle of a word on top of another hyphen." in
   print_endline "==================";
-  TW.wrap ~max_width:5.0 ~hyphenate:true wrapInput |> AppendList.to_list |> List.iter print_endline;
+  TW.wrap ~max_width:5.0 ~hyphenate:true wrapInput |> AppendList.iter print_endline;
   print_endline "==================";
-  TW.wrap ~max_width:10.0 ~hyphenate:true wrapInput |> AppendList.to_list |> List.iter print_endline;
+  TW.wrap ~max_width:10.0 ~hyphenate:true wrapInput |> AppendList.iter print_endline;
   print_endline "==================";
-  TW.wrap ~max_width:15.0 wrapInput |> AppendList.to_list |> List.iter print_endline;
+  TW.wrap ~max_width:15.0 wrapInput |> AppendList.iter print_endline;
   print_endline "==================";
-  TW.wrap ~max_width:40.0 wrapInput |> AppendList.to_list |> List.iter print_endline
+  TW.wrap ~max_width:40.0 wrapInput |> AppendList.iter print_endline
