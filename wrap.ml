@@ -87,7 +87,6 @@ let wrap_queue ~max_width ~width_of_char ?(hyphenate=false) ?(ignore_preceding_w
             if debug then begin
               print_endline "--Decision: append"
             end;
-
             (* Append it to the buffer *)
             Buffer.add_char buffer token.[i];
             width := !width +. char_width
@@ -103,13 +102,12 @@ let wrap_queue ~max_width ~width_of_char ?(hyphenate=false) ?(ignore_preceding_w
                 if debug then begin
                   print_endline "--Clear+hyphenate"
                 end;
-
                 (* We need to swap the last char of the buffer with a -, because the
                     hyphen will be the last character that fits into this width. *)
                 let buffer_length = Buffer.length buffer in
                 let last_char = Buffer.nth buffer (buffer_length - 1) in
                 (* If we've only put one character of the string before hyphenating, we
-                    should just swap with a space, so that we don't have a lonley hyphen
+                    should just swap with a space, so that we don't have a lonely hyphen
                     on the previous line *)
                 let hyphen = if i = 1 then " " else "-" in
                 (* Flush the buffer with the hyphen and reset the buffer to just the last
@@ -149,7 +147,6 @@ let wrap_queue ~max_width ~width_of_char ?(hyphenate=false) ?(ignore_preceding_w
         Buffer.add_string buffer token
       end
     end;
-
     (* Finalize any remaining text in the buffer *)
     if !width > 0.0 then begin
       Queue.add (Buffer.contents buffer) output_lines
