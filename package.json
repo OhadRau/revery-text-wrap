@@ -22,8 +22,7 @@
     "ocaml": "~4.6.0"
   },
   "dependencies": {
-    "@opam/dune": "*",
-    "@opam/batteries": "*"
+    "@opam/dune": "*"
   },
   "devDependencies": {
     "@esy-ocaml/merlin": "*",

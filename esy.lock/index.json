@@ -1,5 +1,5 @@
 {
-  "checksum": "95fddfbe06a8e7053772faba95f202e8",
+  "checksum": "cc006d0bdfbfef724f809d0d0560dec7",
   "root": "revery-text-wrap@link-dev:./package.json",
   "node": {
     "revery-text-wrap@link-dev:./package.json": {
@@ -13,8 +13,7 @@
       },
       "overrides": [],
       "dependencies": [
-        "ocaml@4.6.1000@d41d8cd9", "@opam/dune@opam:1.11.4@a7ccb7ae",
-        "@opam/batteries@opam:2.11.0@2e433a84"
+        "ocaml@4.6.1000@d41d8cd9", "@opam/dune@opam:1.11.4@a7ccb7ae"
       ],
       "devDependencies": [
         "ocaml@4.6.1000@d41d8cd9", "@esy-ocaml/merlin@3.0.5005@d41d8cd9"
@@ -87,61 +86,6 @@
       ],
       "dependencies": [
         "ocaml@4.6.1000@d41d8cd9", "@opam/conf-m4@opam:1@3b2b148a",
-        "@esy-ocaml/substs@0.0.1@d41d8cd9"
-      ],
-      "devDependencies": [ "ocaml@4.6.1000@d41d8cd9" ]
-    },
-    "@opam/ocamlbuild@opam:0.14.0@6ac75d03": {
-      "id": "@opam/ocamlbuild@opam:0.14.0@6ac75d03",
-      "name": "@opam/ocamlbuild",
-      "version": "opam:0.14.0",
-      "source": {
-        "type": "install",
-        "source": [
-          "archive:https://opam.ocaml.org/cache/sha256/87/87b29ce96958096c0a1a8eeafeb6268077b2d11e1bf2b3de0f5ebc9cf8d42e78#sha256:87b29ce96958096c0a1a8eeafeb6268077b2d11e1bf2b3de0f5ebc9cf8d42e78",
-          "archive:https://github.com/ocaml/ocamlbuild/archive/0.14.0.tar.gz#sha256:87b29ce96958096c0a1a8eeafeb6268077b2d11e1bf2b3de0f5ebc9cf8d42e78"
-        ],
-        "opam": {
-          "name": "ocamlbuild",
-          "version": "0.14.0",
-          "path": "esy.lock/opam/ocamlbuild.0.14.0"
-        }
-      },
-      "overrides": [
-        {
-          "opamoverride":
-            "esy.lock/overrides/opam__s__ocamlbuild_opam__c__0.14.0_opam_override"
-        }
-      ],
-      "dependencies": [
-        "ocaml@4.6.1000@d41d8cd9", "@esy-ocaml/substs@0.0.1@d41d8cd9"
-      ],
-      "devDependencies": [ "ocaml@4.6.1000@d41d8cd9" ]
-    },
-    "@opam/num@opam:1.3@43fe4f7f": {
-      "id": "@opam/num@opam:1.3@43fe4f7f",
-      "name": "@opam/num",
-      "version": "opam:1.3",
-      "source": {
-        "type": "install",
-        "source": [
-          "archive:https://opam.ocaml.org/cache/md5/f0/f074e12325e84ebc883b37e5db10403d#md5:f074e12325e84ebc883b37e5db10403d",
-          "archive:https://github.com/ocaml/num/archive/v1.3.tar.gz#md5:f074e12325e84ebc883b37e5db10403d"
-        ],
-        "opam": {
-          "name": "num",
-          "version": "1.3",
-          "path": "esy.lock/opam/num.1.3"
-        }
-      },
-      "overrides": [
-        {
-          "opamoverride":
-            "esy.lock/overrides/opam__s__num_opam__c__1.3_opam_override"
-        }
-      ],
-      "dependencies": [
-        "ocaml@4.6.1000@d41d8cd9", "@opam/ocamlfind@opam:1.8.1@ff07b0f9",
         "@esy-ocaml/substs@0.0.1@d41d8cd9"
       ],
       "devDependencies": [ "ocaml@4.6.1000@d41d8cd9" ]
@@ -266,32 +210,6 @@
       "devDependencies": [
         "ocaml@4.6.1000@d41d8cd9", "@opam/easy-format@opam:1.3.2@0484b3c4",
         "@opam/dune@opam:1.11.4@a7ccb7ae"
-      ]
-    },
-    "@opam/batteries@opam:2.11.0@2e433a84": {
-      "id": "@opam/batteries@opam:2.11.0@2e433a84",
-      "name": "@opam/batteries",
-      "version": "opam:2.11.0",
-      "source": {
-        "type": "install",
-        "source": [
-          "archive:https://opam.ocaml.org/cache/md5/fc/fcdfd57b2473c19fb55149247335d771#md5:fcdfd57b2473c19fb55149247335d771",
-          "archive:https://github.com/ocaml-batteries-team/batteries-included/archive/v2.11.0.tar.gz#md5:fcdfd57b2473c19fb55149247335d771"
-        ],
-        "opam": {
-          "name": "batteries",
-          "version": "2.11.0",
-          "path": "esy.lock/opam/batteries.2.11.0"
-        }
-      },
-      "overrides": [],
-      "dependencies": [
-        "ocaml@4.6.1000@d41d8cd9", "@opam/ocamlfind@opam:1.8.1@ff07b0f9",
-        "@opam/ocamlbuild@opam:0.14.0@6ac75d03",
-        "@opam/num@opam:1.3@43fe4f7f", "@esy-ocaml/substs@0.0.1@d41d8cd9"
-      ],
-      "devDependencies": [
-        "ocaml@4.6.1000@d41d8cd9", "@opam/num@opam:1.3@43fe4f7f"
       ]
     },
     "@opam/base-unix@opam:base@87d0b2eb": {
